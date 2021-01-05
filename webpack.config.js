@@ -71,15 +71,18 @@ module.exports = {
       patterns: [
         {
           from: path.resolve(__dirname, 'src/favicon.png'),
-          to: path.resolve(__dirname, 'dist'),
+          to: path.resolve(__dirname, 'dist/images'),
+          noErrorOnMissing: true,
         },
         {
           from: path.resolve(__dirname, 'src/assets/images'),
-          to: path.resolve(__dirname, 'dist'),
+          to: path.resolve(__dirname, 'dist/images'),
+          noErrorOnMissing: true,
         },
         {
           from: path.resolve(__dirname, 'src/assets/audio'),
           to: path.resolve(__dirname, 'dist/audio'),
+          noErrorOnMissing: true,
         },
       ],
     }),
@@ -92,6 +95,15 @@ module.exports = {
       {
         test: /\.css$/,
         use: cssLoaders(),
+      },
+      {
+        test: /components[\\/].+\.(html)$/,
+        use: [
+          {
+            loader: 'html-loader',
+            options: { minimize: false },
+          },
+        ],
       },
       {
         test: /\.s[ac]ss$/,
